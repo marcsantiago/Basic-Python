@@ -1,4 +1,3 @@
-__author__ = 'marc santago'
 #!/usr/bin/python2.7
 _author_ = 'Marc Santiago'
 import math
