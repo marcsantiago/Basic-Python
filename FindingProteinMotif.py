@@ -13,7 +13,7 @@ def readSeq(FASTA):
 with file('proteinnames.txt', 'r') as data:
     proteinnames = data.read().strip().split()
 
-motif = re.compile('N[^P][ST][^P]')
+motif = re.compile('N(?=[^P][ST][^P])') #using a look ahead to make sure overlapping matches are found
 
 #retrieves and stores the sequences in a list
 seqlist = []
@@ -36,7 +36,7 @@ for key, seqs in id_seq.items():
     temp = []
     if re.search(motif, seqs):
         keys.append(key)  #will only append proteins that have the motif
-    for find in [find.start() + 1 for find in re.finditer(motif, seqs)]:  #should find overlapping matches
+    for find in [find.start() + 1 for find in re.finditer(motif, seqs)]:  
         if re.search(motif, seqs):
             temp.append(find)  #failsafe to insure only matches with the motif append
     if len(temp) != 0:  #insures that an empty list doesn't get appended
@@ -49,3 +49,4 @@ od = collections.OrderedDict(sorted(ordered_dict.items()))  #sorts the list alph
 for k, v in od.items():
     print k
     print v
+
