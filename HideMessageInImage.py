@@ -12,8 +12,10 @@ answer = buttonbox("What would you like to do, encrypt a message or decrypt the 
 
 if answer == "Encrypt":
     plaintext = enterbox("Enter a message you would like to hide in an image")
+    # creates a long vertical image 1 pixel wide
     im = Image.fromstring('L', (1, len(plaintext)), plaintext)
     filename = enterbox("Give your image a name")
+    # check to see if the user added the extention manually
     if ".png" in filename:
         filename = filename.replace(".png", "")
     im.save(filename + ".png", format("PNG"))
@@ -24,6 +26,7 @@ elif answer == "Decrypt":
     my_image = Image.open(image_file)
     pix = my_image.getdata()
     temp = []
+    # convert the ascii data back into characters and recontruct the string
     for i in list(pix):
         temp.append(i)
     msgbox("".join([chr(i) for i in temp]))
