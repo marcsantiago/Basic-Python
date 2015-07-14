@@ -42,7 +42,7 @@ for key, seqs in id_seq.items():
     if len(temp) != 0:  #insures that an empty list doesn't get appended
         crimp = ''.join(str(temp))
         dna.append(crimp.replace('[', '').replace(']', '').replace(',', '').strip())
-
+# perhaps I should using izip to reduce memory impact
 ordered_dict = dict(zip(keys, dna))  #binds the stored protein names with there associated sequences
 od = collections.OrderedDict(sorted(ordered_dict.items()))  #sorts the list alphabetically by key value
 
